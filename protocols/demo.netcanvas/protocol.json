@@ -42,7 +42,7 @@
           "special_category": {
             "label": "Special category",
             "description": "Human readable description",
-            "type": "enumerable",
+            "type": "ordinal",
             "options": [46]
           },
           "some_options": {
@@ -73,6 +73,51 @@
             "label": "Has given advice?",
             "description": "Human readable description",
             "type": "boolean"
+          },
+          "uid": {
+            "label": "Unique id",
+            "description": "Unique id",
+            "type": "text"
+          },
+          "type": {
+            "label": "Type",
+            "description": "Type",
+            "type": "text"
+          },
+          "age": {
+            "label": "Age",
+            "description": "Age",
+            "type": "number"
+          },
+          "itemType": {
+            "label": "Item type",
+            "description": "Item type",
+            "type": "text"
+          },
+          "stageId": {
+            "label": "Stage id",
+            "description": "Stage id",
+            "type": "text"
+          },
+          "promptId": {
+            "label": "Prompt id",
+            "description": "Prompt id",
+            "type": "text"
+          },
+          "createdIndex": {
+            "label": "Created Index",
+            "description": "Created Index",
+            "type": "number"
+          },
+          "closenessLayout": {
+            "label": "Closeness layout",
+            "description": "Closeness layout",
+            "type": "layout"
+          },
+          "timeCreated": {
+            "label": "Time created",
+            "description": "Time created",
+            "type": "datetime"
           }
         }
       },
@@ -103,17 +148,10 @@
         "label": "Friend",
         "color": "edge-color-seq-1",
         "variables": {
-          "contact_freq": {
-            "label": "contact_freq",
-            "description": "Contact frequency.",
-            "type": "ordinal",
-            "values": {
-              "Very Often": 4,
-              "Often": 3,
-              "Sometimes": 2,
-              "Rarely": 1,
-              "Never": -1
-            }
+          "type": {
+            "label": "Type",
+            "description": "Type",
+            "type": "text"
           }
         }
       },
@@ -199,11 +237,6 @@
         {
           "variable": "age",
           "component": "TextInput"
-        },
-        {
-          "variable": "timeCreated",
-          "component": "hidden",
-          "value": "return Date.now().toString();"
         }
       ]
     },
@@ -223,11 +256,6 @@
         {
           "variable": "age",
           "component": "TextInput"
-        },
-        {
-          "variable": "timeCreated",
-          "component": "hidden",
-          "value": "return Date.now().toString();"
         }
       ]
     }
@@ -295,7 +323,7 @@
             "allowPositioning": true
           },
           "edges": {
-            "display": ["friends", "professional"],
+            "display": ["friend", "professional"],
             "create": "friends"
           },
           "highlight": {
@@ -304,7 +332,7 @@
             "allowHighlighting": true
           },
           "disable": "return operator.or([\nselect.edge({ type: 'friend' }),\nselect.alter({ type: 'person', attribute: 'age', operator: 'LESS_THAN', value: 29 })]);",
-          "nodeBinSortOrder":  [
+          "sortOrderBy":  [
             {
               "property": "nickname",
               "direction": "desc"
